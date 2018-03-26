@@ -70,8 +70,8 @@ L<Mojolicious::Plugin> and implements the following.
 =cut
 
 use Mojo::Base 'Mojolicious::Plugin';
-use Mojo::Util qw(sha1_sum);
 use Mojo::JSON qw(encode_json decode_json);
+use Session::Token;
 use Carp qw(croak);
 use Fcntl qw(:DEFAULT :flock);
 use autodie;
@@ -137,12 +137,12 @@ sub register {
 
 =func generator
 
-The default secret generator, a SHA-1 sum of a few low-effort sources.
+The default secret generator, using Session::Token
 
 =cut
 
 sub generator {
-  sha1_sum(join '', rand(1000) x 2, $$, localtime)
+  Session::Token->new->get;
 }
 
 
