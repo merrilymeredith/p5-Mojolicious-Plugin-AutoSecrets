@@ -74,6 +74,7 @@ use Mojo::JSON qw(encode_json decode_json);
 use Session::Token;
 use Carp qw(croak);
 use Fcntl qw(:DEFAULT :flock);
+use IO::File;
 use autodie;
 
 =method register
